@@ -1,9 +1,8 @@
 package gpool
 
-
 import (
-"context"
-"sync"
+	"context"
+	"sync"
 )
 
 // GPool 协程池

@@ -1,7 +1,5 @@
 package grpcp
 
-
-
 import (
 	"context"
 	"fmt"
