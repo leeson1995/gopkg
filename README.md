@@ -5,10 +5,18 @@
 
 > 非全部原创，部分包为ctrl+C
 
-## Feature
 
-- 通用连接池
-- 懒加载对象容器
-- ringbuf 实现
-- goroutine池
-- grpc连接池 
+##Usage
+-----------
+
+> go get github.com/leeson1995/go-common@latest
+
+
+## Feature
+-----------
+
+- [ ] ringbuf
+- [x] 通用连接池
+- [x] 懒加载对象容器
+- [x] goroutine池
+- [x] grpc连接池 
