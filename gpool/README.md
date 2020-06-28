@@ -1,13 +1,4 @@
 
-Installation
------------
-
-	go get leeson1995/go-common/gpool
-
-Requirements
------------
-
-* Need at least `go1.13` or newer.
 
 Usage
 -----------

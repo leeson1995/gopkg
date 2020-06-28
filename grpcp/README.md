@@ -1,10 +1,4 @@
 
-Installation
------------
-
-```bash
-go get -u leeson1995/go-common/grpcp
-```
 
 Usage
 -----------
@@ -59,7 +53,7 @@ import (
     "context"
     "fmt"
 
-    "leeson1995/go-common/grpcp"
+    "github.com/leeson1995/go-common/grpcp"
     "google.golang.org/grpc"
     pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
