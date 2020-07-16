@@ -1,3 +1,7 @@
+// Copyright 2016 ~ 2019 Leeson(https://github.com/Leeson1995).
+// All rights reserved.  Use of this source code is
+// governed by Apache License 2.0.
+
 // Package group provides a sample lazy load container.
 // The group only creating a new object not until the object is needed by user.
 // And it will cache all the objects to reduce the creation of object.
