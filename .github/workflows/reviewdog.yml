@@ -1,0 +1,153 @@
+name: reviewdog
+on: [pull_request]
+jobs:
+  # NOTE: golangci-lint doesn't report multiple errors on the same line from
+  # different linters and just report one of the errors?
+
+  golangci-lint:
+    name: runner / golangci-lint (pre-build docker image)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+      - name: golangci-lint
+        # uses: ./ # Build with Dockerfile
+        uses: docker://reviewdog/action-golangci-lint:v1 # Pre-built image
+        with:
+          github_token: ${{ secrets.github_token }}
+          golangci_lint_flags: "--config=.github/.golangci.yml ./testdata"
+
+  golangci-lint-dockerfile:
+    name: runner / golangci-lint (Dockerfile)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+      - name: golangci-lint w/ Dockerfile
+        uses: ./ # Build with Dockerfile
+        # uses: docker://reviewdog/action-golangci-lint:v1 # Pre-built image
+        with:
+          golangci_lint_flags: "./testdata"
+          tool_name: "golangci-lint-dockerfile"
+
+  golangci-lint-github-pr-review:
+    name: runner / golangci-lint (github-pr-review)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+      - name: golangci-lint w/ github-pr-review
+        uses: ./ # Build with Dockerfile
+        with:
+          golangci_lint_flags: "./testdata"
+          tool_name: "golangci-lint-github-pr-review"
+          reporter: "github-pr-review"
+
+  golangci-lint-github-check:
+    name: runner / golangci-lint (github-check)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+      - name: golangci-lint w/ github-check
+        uses: ./ # Build with Dockerfile
+        with:
+          golangci_lint_flags: "./testdata"
+          tool_name: "golangci-lint-github-check"
+          level: warning
+          reporter: "github-check"
+
+  golangci-lint-workdir:
+    name: runner / golangci-lint (workdir)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: golangci-lint (workdir)
+        uses: ./ # Build with Dockerfile
+        with:
+          workdir: "./testdata"
+          golangci_lint_flags: ""
+          tool_name: "golangci-lint-workdir"
+          level: warning
+          reporter: "github-check"
+          filter_mode: "file"
+
+  golangci-lint-all-in-one:
+    name: runner / golangci-lint-all-in-one
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+      - name: golangci-lint (All-In-One config)
+        uses: docker://reviewdog/action-golangci-lint:v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          golangci_lint_flags: "--enable-all --exclude-use-default=false ./testdata"
+
+  govet:
+    name: runner / govet
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+      - name: govet
+        uses: docker://reviewdog/action-golangci-lint:v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          golangci_lint_flags: "--disable-all -E govet ./testdata"
+          tool_name: govet
+
+  staticcheck:
+    name: runner / staticcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+      - name: staticcheck
+        uses: docker://reviewdog/action-golangci-lint:v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          golangci_lint_flags: "--disable-all -E staticcheck ./testdata"
+          tool_name: staticcheck
+
+  golint:
+    name: runner / golint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+      - name: golint
+        uses: docker://reviewdog/action-golangci-lint:v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          golangci_lint_flags: "--disable-all -E golint ./testdata"
+          tool_name: golint
+          level: warning
+
+  errcheck:
+    name: runner / errcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+      - name: errcheck
+        uses: docker://reviewdog/action-golangci-lint:v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          golangci_lint_flags: "--disable-all -E errcheck ./testdata"
+          tool_name: errcheck
+          level: warning
+
+  misspell:
+    name: runner / misspell
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+      - name: misspell
+        uses: docker://reviewdog/action-golangci-lint:v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          golangci_lint_flags: "--disable-all -E misspell ./testdata"
+          tool_name: misspell
+          level: info
