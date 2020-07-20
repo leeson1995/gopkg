@@ -2,6 +2,10 @@
 
 # Ring buffer
 
-> 环形数组队列，特定场景无锁，cpu cache friendly。
+> TODO
+
 -----
-> 只适用于1个生产者 1个消费者 场景
+# ThrowRing 
+
+> 环形数组队列 cpu cache friendly。
+> 队列固定长度，当head（生产）速度大于 tail（消费）速度时，会将末位消息淘汰。
