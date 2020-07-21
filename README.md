@@ -15,7 +15,7 @@
 ## Feature
 -----------
  
-- [ ] ring buffer
+- [x] ring buffer
 - [x] 通用连接池
 - [x] 懒加载对象容器
 - [x] goroutine池
