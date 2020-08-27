@@ -2,7 +2,6 @@
 // All rights reserved.  Use of this source code is
 // governed by Apache License 2.0.
 
-
 package gpool
 
 import (
@@ -93,4 +92,7 @@ func (gp *GPool) Stop() {
 	for range gp.queue {
 		gp.wg.Done()
 	}
+}
+func (gp *GPool) QueueLen() int {
+	return len(gp.queue)
 }
