@@ -71,12 +71,12 @@ func (q *ThrowRing) Add(elem interface{}) {
 
 func (q *ThrowRing) Get() interface{} {
 	q.mu.Lock()
-
+	defer q.mu.Unlock()
 	ret := q.buf[q.tail]
-	q.buf[q.tail] = nil
-	q.tail = (q.tail + 1) & (q.size - 1)
-
-	q.mu.Unlock()
+	if ret != nil {
+		q.buf[q.tail] = nil
+		q.tail = (q.tail + 1) & (q.size - 1)
+	}
 
 	return ret
 
