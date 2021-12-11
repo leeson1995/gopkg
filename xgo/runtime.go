@@ -27,7 +27,7 @@ func GoWithCleaner(fn func(), cleaner ...func()) {
 	go goSafe(fn, cleaner...)
 }
 
-func goSafe(fn func(), cleaner ...func()) {
+func goSafe(fn func(), cleaner  ...func()) {
 	defer Recover(cleaner...)
 	fn()
 }
