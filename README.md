@@ -1,18 +1,16 @@
-# go-common
+
+# gopkg
+
+go 常用基础工具包
 
 
-## go 常用工具包
-
-> 非全部原创，部分包为ctrl+C
-
-
-## Usage
+ Usage
 -----------
 
 > go get github.com/leeson1995/go-common@latest
 
 
-## Feature
+ Feature
 -----------
  
 - [x] ring buffer
