@@ -3,6 +3,7 @@ package kafka
 import (
 	"github.com/Shopify/sarama"
 	"github.com/golang/protobuf/proto"
+	"log"
 )
 
 type Producer struct {
@@ -39,7 +40,7 @@ func (p *Producer) SendMessage(m proto.Message, key ...string) (int32, int64, er
 	}
 	bMsg, err := proto.Marshal(m)
 	if err != nil {
-		log2.Error("", "", "proto marshal err = %s", err.Error())
+		log.Printf("", "", "proto marshal err = %s", err.Error())
 		return -1, -1, err
 	}
 	kMsg.Value = sarama.ByteEncoder(bMsg)
