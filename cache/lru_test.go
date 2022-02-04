@@ -1,9 +1,7 @@
-package cache_test
+package cache
 
 import (
 	"testing"
-
-	. "github.com/v2fly/v2ray-core/v5/common/cache"
 )
 
 func TestLruReplaceValue(t *testing.T) {
